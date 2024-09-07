@@ -214,583 +214,504 @@ const fadeAnimation = trigger('fadeAnimation', [
     </footer>
   `,
   styles: [`
-    :host {
-      display: block;
-      font-family: Arial, sans-serif;
-    }
-    .container {
-      min-height: auto;
-      display: flex;
-      flex-direction: column;
-      padding: 10px 20px 20px;
-      box-sizing: border-box;
-      background-color: #000000;
-      color: #ffffff;
-    }
-    .navigation {
-      display: flex;
-      justify-content: flex-end;
-      padding-top: 20px;
-      padding-bottom: 1px;
-    }
-    .nav-link {
-      color: #ffffff;
-      text-decoration: none;
-      margin-left: 20px;
-      font-size: 16px;
-      transition: color 0.3s ease;
-    }
-    .nav-link:hover {
-      color: #cccccc;
-    }
-    .content {
-      display: flex;
-      flex: 1;
-      gap: 20px;
-      margin-top: 0px;
-      align-items: center;
-    }
-    .image-container {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .profile-image {
-      width: 500px;
-      height: 500px;
-      object-fit: cover;
-      margin-left: 30px;
-    }
-    .text-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-left: -120px;
-      text-align: center;
-    }
-    .title {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      margin-left: 30px;
-    }
-    .about-text {
-      font-size: 18px;
-      line-height: 1.6;
-      margin: 0;
-      text-align: justify;
-      margin-left: 30px;
-      max-width: 600px;
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-    }
-    
-    .social-link {
-      margin: 0 10px;
-    }
-    
-    .social-icon {
-      width: 30px;
-      height: 30px;
-      transition: transform 0.3s ease;
-    }
-    
-    .social-icon:hover {
-      transform: scale(1.1);
-    }
-    
-    @media (max-width: 768px) {
-      .text-container {
-        margin-left: 0;
-        align-items: center;
-      }
-      
-      .about-text {
-        text-align: center;
-      }
-    }
-    
-    .experiences-section {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 40px 20px;
-      width: 100%;
-      box-sizing: border-box;
-      height: 610px;
-      padding-top: 5px;
-    }
-    .experiences-title {
-      font-size: 2.5em;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .experiences-content {
-      display: flex;
-      justify-content: center;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .experiences-list {
-      flex: 0 0 30%;
-      margin-right: 40px;
-    }
-    .experiences-intro {
-      font-size: 1.2em;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-    .experience-item {
-      padding: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .experience-item:hover, .experience-item.active {
-      background-color: #f0f0f0;
-    }
-    .experience-description {
-      flex: 0 0 60%;
-      height: 600px; 
-    }
-    .experience-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    .company-logo {
-      width: 50px;
-      height: 50px;
-      margin-right: 15px;
-      object-fit: contain;
-    }
-    .experience-description h3 {
-      margin-bottom: 5px;
-    }
-    .experience-date {
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    .shiftsc-logo {
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    ul {
-      padding-left: 20px;
-      margin-top: 10px;
-    }
-    li {
-      margin-bottom: 5px;
-      line-height: 1.4;
-    }
-    @media (max-width: 768px) {
-      .container {
-        min-height: auto;
-      }
-      .navigation {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .nav-link {
-        margin: 5px 10px;
-      }
-      .content {
-        flex-direction: column;
-      }
-      .image-container, .text-container {
-        width: 100%;
-      }
-      .profile-image {
-        width: 100%;
-        height: auto;
-        margin-left: 0;
-      }
-      .text-container {
-        margin-left: 0;
-      }
-      .title, .about-text {
-        margin-left: 0;
-      }
-      .experiences-content {
-        flex-direction: column;
-      }
-      .experiences-list, .experience-description {
-        flex: 1 1 auto;
-        margin-right: 0;
-      }
-    }
-    .projects-section {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 40px 20px;
-      width: 100%;
-      box-sizing: border-box;
-      padding-top: 10px;
-    }
-    .projects-title {
-      font-size: 2.5em;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .projects-intro {
-      text-align: center;
-      margin-top: -5px;
-      margin-bottom: 30px;
-      font-size: 1em;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .project-item {
-      display: flex;
-      flex-direction: column;
-      border-radius: 10px;
-      overflow: hidden;
-      background-color: #ffffff;
-      color: #000000;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .project-item:hover {
-      transform: scale(1.05);
-    }
-    .project-info {
-      padding: 15px;
-    }
-    .project-info h3 {
-      margin: 0 0 10px 0;
-    }
-    .project-info p {
-      margin: 0;
-      font-size: 0.9em;
-    }
-    .project-image {
-      width: 100%;
-      height: px;
-      object-fit: cover;
-    }
-    .project-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      text-align: center;
-    }
-    .project-overlay h3 {
-      margin-bottom: 10px;
-    }
-    .project-button {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background-color: #ffffff;
-      color: #000000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .modal {
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .modal-content {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 20px 30px;
-      border-radius: 10px;
-      max-width: 500px;
-      position: relative;
-    }
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .modal-image {
-      width: 100%;
-      max-height: 300px;
-      object-fit: cover;
-      border-radius: 5px;
-      margin-bottom: 15px;
-    }
-    .github-link {
-      display: inline-block;
-      margin-top: 15px;
-      padding: 8px 16px;
-      background-color: #24292e;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-    @media (max-width: 768px) {
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-    .organizations-section {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 40px 20px;
-      width: 100%;
-      box-sizing: border-box;
-      padding-top: 10px;
-    }
-    .organizations-title {
-      font-size: 2.5em;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .organization-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 60px;
-    }
-    .organization-row.reverse {
-      flex-direction: row-reverse;
-    }
-    .org-image-container, .org-info {
-      flex: 0 0 48%;
-    }
-    .org-image {
-      width: 100%;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-left: 0;
-    }
-    .org-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    .org-header h3 {
-      margin: 0;
-      margin-right: 15px;
-    }
-    .org-logo {
-      width: 50px;
-      height: 50px;
-      object-fit: contain;
-    }
-    .org-info {
-      padding-top: 20px;
-    }
-    .org-info ul {
-      padding-left: 20px;
-    }
-    .org-info li {
-      margin-bottom: 10px;
-    }
+  :host {
+    display: block;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px 20px;
+    box-sizing: border-box;
+    background-color: #000000;
+    color: #ffffff;
+  }
+  .navigation {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-bottom: 1px;
+  }
+  .nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  .nav-link:hover {
+    color: #cccccc;
+  }
+  .content {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    margin-top: 0px;
+    align-items: center;
+  }
+  .image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .profile-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+  }
+  .text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .title {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+  }
+  .about-text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    max-width: 600px;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .social-link {
+    margin: 0 15px;
+  }
+  .social-icon {
+    width: 45px;
+    height: 40px;
+    transition: transform 0.3s ease;
+  }
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .experiences-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 5px;
+    height: 610px; 
+    overflow: hidden; 
+  }
 
-    .organization-row {
-      position: relative;
-    }
-    
-    .org-image-container, .org-info {
-      position: relative;
-    }
-    
-    .cais-image {
-      left: 55px;
-      top: 45px;
-    }
-    .cais-info {
-      right: -10px;
-      top: 30px;
-    }
-    
-    .shiftinfo {
-      left: 40px;
-      top: 30px;
-    }
-    .shiftimage {
-      right: 0px;
-      top: 0px;
-    }
+  .experiences-title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .experiences-content {
+    display: flex;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 500px; 
+  }
 
-    .annenbergimage {
-      left: 55px;
-      top: 0px;
-    }
-    .annenberginfo {
-      right: -10px;
-      top: 30px;
-    }
+  .experiences-list {
+    flex: 0 0 30%;
+    margin-right: 40px;
+    overflow-y: auto;
+  }
 
-    @media (max-width: 768px) {
-      .organization-row, .organization-row.reverse {
-        flex-direction: column;
-      }
-      .org-image-container, .org-info {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-      }
-    }
+  .experiences-intro {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  .experience-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  .experience-item:hover, .experience-item.active {
+    background-color: #f0f0f0;
+  }
+  .experience-description {
+    flex: 0 0 60%;
+    overflow-y: auto; 
+  }
+  .experience-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .company-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    object-fit: contain;
+  }
+  .experience-description h3 {
+    margin-bottom: 5px;
+  }
+  .experience-date {
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .shiftsc-logo {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  ul {
+    padding-left: 20px;
+    margin-top: 10px;
+  }
+  li {
+    margin-bottom: 5px;
+    line-height: 1.4;
+  }
+  
+  .projects-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 10px;
+  }
+  .projects-title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .projects-intro {
+    text-align: center;
+    margin-top: -5px;
+    margin-bottom: 30px;
+    font-size: 1em;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .project-item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #ffffff;
+    color: #000000;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .project-item:hover {
+    transform: scale(1.05);
+  }
+  .project-info {
+    padding: 15px;
+  }
+  .project-info h3 {
+    margin: 0 0 10px 0;
+  }
+  .project-info p {
+    margin: 0;
+    font-size: 0.9em;
+  }
+  .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+  }
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .modal-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  .github-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background-color: #24292e;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .organizations-section {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 40px 20px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 10px;
+  }
+  .organizations-title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .organization-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+  }
+  .organization-row.reverse {
+    flex-direction: row-reverse;
+  }
+  .org-image-container, .org-info {
+    flex: 0 0 48%;
+  }
+  .org-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .org-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .org-header h3 {
+    margin: 0;
+    margin-right: 15px;
+  }
+  .org-logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+  .org-info {
+    padding-top: 20px;
+  }
+  .org-info ul {
+    padding-left: 20px;
+  }
+  .org-info li {
+    margin-bottom: 10px;
+  }
 
-    .hobbies-section {
-      background-color: #000000;
-      color: #ffffff;
-      padding: 10px 20px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    
-    .hobbies-title {
-      font-size: 2.5em;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .hobbies-images {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
-    
-    .hobby-image-container {
-      flex: 0 0 31%;
-    }
-    
-    .hobby-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    
-    .hobbies-descriptions {
-      display: flex;
-      justify-content: space-between;
-    }
-    
-    .hobby-description {
-      flex: 0 0 31%;
-    }
-    
-    .hobby-description h3 {
-      margin-bottom: 10px;
-    }
-    
-    @media (max-width: 768px) {
-      .hobbies-images, .hobbies-descriptions {
-        flex-direction: column;
-      }
-    
-      .hobby-image-container, .hobby-description {
-        flex: 0 0 100%;
-        margin-bottom: 20px;
-      }
-    }
-    .footer {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    
-    .footer-text {
-      font-size: 1.2em;
-      margin-bottom: 20px;
-    }
-    
-    .social-links {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    
-    .social-link {
-      margin: 0 15px;
-    }
-    
-    .social-icon {
-      width: 100%;
-      height: auto;
-      max-width: 50px; 
-      transition: transform 0.3s ease;
-    }
-    
-    .social-icon:hover {
-      transform: scale(1.1);
-    }
-    
-    .copyright {
-      font-size: 0.9em;
-      opacity: 0.8;
-    }
+  .hobbies-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .hobbies-title {
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .hobbies-images {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  .hobby-image-container {
+    flex: 0 0 31%;
+  }
+  .hobby-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  .hobbies-descriptions {
+    display: flex;
+    justify-content: space-between;
+  }
+  .hobby-description {
+    flex: 0 0 31%;
+  }
+  .hobby-description h3 {
+    margin-bottom: 10px;
+  }
+  
+  .footer {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .footer-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .footer-text {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  .copyright {
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
 
-    .gmail-link {
-      position: relative;
-      top: -1px; 
-    }
-    .social-links {
-      display: flex;
-      justify-content: center;
-      align-items: center; 
-      margin-bottom: 20px;
-    }
+  .fade-in, .slide-up {
+    opacity: 0;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.appear {
+    opacity: 1;
+  }
+  .slide-up {
+    transform: translateY(50px);
+  }
+  .slide-up.appear {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .fade-in, .slide-up {
+  @keyframes fadeInUp {
+    from {
       opacity: 0;
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      transform: translateY(20px);
     }
-    
-    .fade-in.appear {
-      opacity: 1;
-    }
-    
-    .slide-up {
-      transform: translateY(50px);
-    }
-    
-    .slide-up.appear {
+    to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+  .animate-fade-in {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+  @media (max-width: 1024px) {
+    .content {
+      flex-direction: column;
     }
-    .animate-fade-in {
-      animation: fadeInUp 0.5s ease-out forwards;
+    .image-container, .text-container {
+      width: 100%;
     }
-  `],
+    .profile-image {
+      margin-left: 0;
+      max-width: 100%;
+      height: auto;
+    }
+    .text-container {
+      margin-left: 0;
+    }
+    .experiences-content {
+      flex-direction: column;
+    }
+    .experiences-list, .experience-description {
+      flex: 1 1 auto;
+      margin-right: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .navigation {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      margin: 5px 10px;
+    }
+    .title {
+      font-size: 2em;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+    }
+    .about-text {
+      font-size: 16px;
+    }
+    .experiences-section {
+      height: auto;
+      max-height: 800px; 
+    }
+
+    .experiences-content {
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .experiences-list, .experience-description {
+      flex: 1 1 auto;
+      margin-right: 0;
+      max-height: 300px; 
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .organization-row, .organization-row.reverse {
+      flex-direction: column;
+    }
+    .org-image-container, .org-info {
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+    }
+    .hobbies-images, .hobbies-descriptions {
+      flex-direction: column;
+    }
+    .hobby-image-container, .hobby-description {
+      flex: 0 0 100%;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 10px;
+    }
+    .title {
+      font-size: 1.8em;
+    }
+    .about-text {
+      font-size: 14px;
+    }
+    .experiences-title, .projects-title, .organizations-title, .hobbies-title {
+      font-size: 2em;
+    }
+    .social-icon {
+      width: 35px;
+      height: 35px;
+    }
+  }
+`],
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
@@ -895,7 +816,7 @@ export class AppComponent implements OnInit {
         'Applying AI/ML concepts related to fields like computer vision, generative AI, and NLP to train models that can analyze and make predictions from various datasets and discussing insights with peers in my cohort',
         'Implemented natural language processing techniques to analyze and understand movie narratives, enhancing recommendation systems by identifying thematic and narrative threads using cosine similarity and TF-IDF vectorization',
         'Developed a binary classification model using computer vision to differentiate between ASL sign language alphabets, achieving a high accuracy of 98.46% by utilizing the Yolov6 model',
-        'Designed and presented research posters in OpenShowCAIS++ 2023 and 2024 in front of hundreds of people'
+        'Designed and resented research posters in OpenShowCAIS++ 2023 and 2024 in front of hundreds of people'
       ],
       image: '/assets/cais.jpg'
     },
