@@ -816,7 +816,7 @@ export class AppComponent implements OnInit {
         'Applying AI/ML concepts related to fields like computer vision, generative AI, and NLP to train models that can analyze and make predictions from various datasets and discussing insights with peers in my cohort',
         'Implemented natural language processing techniques to analyze and understand movie narratives, enhancing recommendation systems by identifying thematic and narrative threads using cosine similarity and TF-IDF vectorization',
         'Developed a binary classification model using computer vision to differentiate between ASL sign language alphabets, achieving a high accuracy of 98.46% by utilizing the Yolov6 model',
-        'Designed and resented research posters in OpenShowCAIS++ 2023 and 2024 in front of hundreds of people'
+        'Designed and presented research posters in OpenShowCAIS++ 2023 and 2024 in front of hundreds of people'
       ],
       image: '/assets/cais.jpg'
     },
