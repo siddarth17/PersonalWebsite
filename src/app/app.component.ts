@@ -21,7 +21,7 @@ interface Project {
 interface Organization {
   name: string;
   logo: string;
-  description: string[];
+  summary: string; 
   image: string;
 }
 
@@ -131,51 +131,43 @@ const fadeAnimation = trigger('fadeAnimation', [
       </div>
     </div>
 
-    <div id="organizations" class="organizations-section fade-in">
-      <h2 class="organizations-title fade-in">Organizations</h2>
+    <div id="organizations" class="organizations-section">
+      <h2 class="organizations-title">Organizations</h2>
       
-      <div class="organization-row cais-row slide-up">
-        <div class="org-image-container cais-image">
-          <img [src]="organizations[0].image" [alt]="organizations[0].name" class="org-image">
-        </div>
-        <div class="org-info cais-info">
-          <div class="org-header">
-            <h3>{{ organizations[0].name }}</h3>
-            <img [src]="organizations[0].logo" [alt]="organizations[0].name + ' logo'" class="org-logo">
+      <div class="slider-container">
+        <div class="slider-wrapper">
+          <div class="slides" [style.transform]="'translateX(' + (-currentSlide * 100) + '%)'">
+            <div *ngFor="let org of organizations; let i = index" class="slide">
+              <div class="slide-content">
+                <div class="org-main-image">
+                  <img [src]="org.image" [alt]="org.name" class="main-image">
+                </div>
+                <div class="org-details">
+                  <div class="org-header">
+                    <img [src]="org.logo" [alt]="org.name + ' logo'" class="org-logo">
+                    <h3 class="org-name">{{ org.name }}</h3>
+                  </div>
+                  <p class="org-summary">{{ org.summary }}</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <ul>
-            <li *ngFor="let point of organizations[0].description">{{ point }}</li>
-          </ul>
         </div>
-      </div>
-      
-      <div class="organization-row shiftrow slide-up">
-        <div class="org-info shiftinfo">
-          <div class="org-header">
-            <h3>{{ organizations[1].name }}</h3>
-            <img [src]="organizations[1].logo" [alt]="organizations[1].name + ' logo'" class="org-logo shiftsc-logo">
+        
+        <div class="slider-nav">
+          <button class="nav-btn prev-btn" (click)="previousSlide()" [disabled]="currentSlide === 0">
+            &#8249;
+          </button>
+          <div class="dots-container">
+            <span *ngFor="let org of organizations; let i = index" 
+                  class="dot" 
+                  [class.active]="i === currentSlide"
+                  (click)="goToSlide(i)">
+            </span>
           </div>
-          <ul>
-            <li *ngFor="let point of organizations[1].description">{{ point }}</li>
-          </ul>
-        </div>
-        <div class="org-image-container shiftimage">
-          <img [src]="organizations[1].image" [alt]="organizations[1].name" class="org-image">
-        </div>
-      </div>
-      
-      <div class="organization-row annenbergrow slide-up">
-        <div class="org-image-container annenbergimage">
-          <img [src]="organizations[2].image" [alt]="organizations[2].name" class="org-image">
-        </div>
-        <div class="org-info annenberginfo">
-          <div class="org-header">
-            <h3>{{ organizations[2].name }}</h3>
-            <img [src]="organizations[2].logo" [alt]="organizations[2].name + ' logo'" class="org-logo">
-          </div>
-          <ul>
-            <li *ngFor="let point of organizations[2].description">{{ point }}</li>
-          </ul>
+          <button class="nav-btn next-btn" (click)="nextSlide()" [disabled]="currentSlide === organizations.length - 1">
+            &#8250;
+          </button>
         </div>
       </div>
     </div>
@@ -482,53 +474,197 @@ const fadeAnimation = trigger('fadeAnimation', [
     padding: 40px 20px;
     width: 100%;
     box-sizing: border-box;
-    padding-top: 10px;
   }
+  
   .organizations-title {
     font-size: 2.5em;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    color: #000000;
   }
-  .organization-row {
+  
+  .slider-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .slider-wrapper {
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  
+  .slides {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 60px;
+    transition: transform 0.5s ease-in-out;
   }
-  .organization-row.reverse {
-    flex-direction: row-reverse;
+  
+  .slide {
+    min-width: 100%;
+    background: white;
   }
-  .org-image-container, .org-info {
-    flex: 0 0 48%;
+  
+  .slide-content {
+    padding: 0;
   }
-  .org-image {
+  
+  .org-main-image {
     width: 100%;
     height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
+    overflow: hidden;
   }
+  
+  .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .slide:hover .main-image {
+    transform: scale(1.05);
+  }
+  
+  .org-details {
+    padding: 30px;
+    background: white;
+  }
+  
   .org-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    gap: 15px;
   }
-  .org-header h3 {
-    margin: 0;
-    margin-right: 15px;
-  }
+  
   .org-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 2px solid #f0f0f0;
+  }
+  
+  .org-name {
+    margin: 0;
+    font-size: 1.8em;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .org-summary {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin: 0;
+    text-align: justify;
+  }
+  
+  .slider-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+  }
+  
+  .nav-btn {
+    background: #007bff;
+    color: white;
+    border: none;
     width: 50px;
     height: 50px;
-    object-fit: contain;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .org-info {
-    padding-top: 20px;
+  
+  .nav-btn:hover:not(:disabled) {
+    background: #0056b3;
+    transform: scale(1.1);
   }
-  .org-info ul {
-    padding-left: 20px;
+  
+  .nav-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
   }
-  .org-info li {
-    margin-bottom: 10px;
+  
+  .dots-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .dot.active {
+    background: #007bff;
+    transform: scale(1.3);
+  }
+  
+  .dot:hover {
+    background: #007bff;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .organizations-section {
+      padding: 30px 15px;
+    }
+    
+    .org-main-image {
+      height: 150px;
+    }
+    
+    .org-details {
+      padding: 20px;
+    }
+    
+    .org-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+    }
+    
+    .org-name {
+      font-size: 1.5em;
+    }
+    
+    .org-summary {
+      font-size: 1em;
+    }
+    
+    .nav-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .slider-nav {
+      padding: 0 10px;
+    }
+    
+    .org-main-image {
+      height: 1000px;
+    }
+    
+    .org-details {
+      padding: 15px;
+    }
   }
 
   .hobbies-section {
@@ -717,15 +853,65 @@ const fadeAnimation = trigger('fadeAnimation', [
 export class AppComponent implements OnInit {
   title = 'My Personal Website';
 
+  currentSlide: number = 0;
+
+  nextSlide() {
+    if (this.currentSlide < this.organizations.length - 1) {
+      this.currentSlide++;
+    }
+  }
+
+  previousSlide() {
+    if (this.currentSlide > 0) {
+      this.currentSlide--;
+    }
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
+  }
+
   experiences: Experience[] = [
+    {
+      title: 'Box',
+      position: 'Software Engineer Intern',
+      date: 'June 2025 - August 2025',
+      description: [
+        'Independently building a Legal Holds Custodians Reporting feature for Box Governance, the company’s top revenue-generating add-on, using Java, Scala, PHP, GCP BigQuery, SQL, and React',
+      ],
+      logo: '/assets/box_logo.jpeg'
+    },
+    {
+      title: 'Center for Artificial Intelligence in Society (CAIS++)',
+      position: 'Machine Learning Researcher',
+      date: 'September 2024 - February 2025',
+      description: [
+        'Led a team of 5 to build a multimodal hate speech detection toolkit, processing 32TB of video data to extract text, speech, and visual sentiment using PyTorch, OpenCV, and Hugging Face Transformers',
+        'Designed an NLP pipeline that extracted and segmented audible text from 10K+ hours of video, integrating Google Cloud Speech-to-Text API with Flask, enabling sentiment and entity analysis for better hate speech detection',
+        'Optimized computer vision models using Detectron2 and EMOCA, improving facial and object recognition and allowing detection of weapons, people, and symbols in video content',
+      ],
+      logo: '/assets/uscviterbi.jpg'
+    },
+    {
+      title: 'SuperWorld',
+      position: 'Software Developer Intern',
+      date: 'February 2025 – April 2025',
+      description: [
+        'Developed user-facing React interfaces connected to secure REST APIs, enabling 150K+ users to authenticate, book land, and complete transactions on a Web3 real estate platform',
+        'Delivered immersive 360-degree video walkthroughs using Node.js and A-Frame, reducing asset load times by 15% and enhancing the viewing experience for 10K+ monthly active users',
+        'Improvised payment workflows, supporting $2–3K average spend per paying user, enhancing transaction integrity, reliability, and overall user experience',
+      ],
+      logo: '/assets/superworld.jpeg'
+    },
     {
       title: 'Next Play',
       position: 'Software Engineer Intern',
       date: 'May 2024 - August 2024',
       description: [
-        'Formulated REST API endpoints using Node.js to manage user payment statuses, leaderboard statistics, and contest data retrieval by implementing PostgreSQL commands, creating a >15% increase in development speed and website load time',
-        'Improved team efficiency by over 10% by leading Scrum-based development of payment and leaderboard pages across 19 states with React and TypeScript, deploying services on Docker containers, and establishing CI/CD controls',
-        'Reduced debugging time by nearly 15% through devising over 52 unit and integration tests using Jest and Selenium'
+        'Developed REST API endpoints using Node.js to securely and reliably manage user payments, leaderboard statistics, and contest details, ensuring seamless data transactions for end users and improving data retrieval time by 10%',
+        'Optimized PostgreSQL queries to improve database throughput and response time, resulting in up to 15% faster API responses',
+        'Contributed to Scrum-based development of payment and leaderboard pages using React and TypeScript, and deployed them with Docker, improving overall website performance and reducing load times by around 10%',
+        'Implemented CI/CD pipelines and 52 unit and integration tests with Jest and Selenium, reducing debugging time by 2 weeks'
       ],
       logo: '/assets/nextplaylogo.png'
     },
@@ -740,26 +926,35 @@ export class AppComponent implements OnInit {
       logo: '/assets/usccs.jpeg'
     },
     {
+      title: 'USC SLURM Lab',
+      position: 'Undergraduate Researcher',
+      date: 'February 2024 - May 2024',
+      description: [
+        'Research assistant at SLURM Lab under Prof. Daniel Seita, working on a Gen-AI project aimed at developing a benchmark for multi-agent, deformable object manipulation tasks',
+        'Imported ALOHA robotic platform and deformable objects via Robosuite into MuJoCo simulation environment, halving training data collection time for a curriculum-based reinforcement learning pipeline',
+        'Built a multi-agent reinforcement learning optimization system using Proximal Policy Optimization and PyTorch, enhancing robotic collaboration in Google DeepMind’s Aloha platform for synchronized object manipulation'
+      ],
+      logo: '/assets/usccs.jpeg'
+    },
+    {
       title: 'ATAI Labs',
       position: 'Software Engineer Intern',
       date: 'May 2023 - August 2023',
       description: [
-        'Executed Python scripts with OpenCV and Pandas for image stitching and data augmentation on CUDA, training transportation detection models using ResNet and PyTorch, resulting in an average accuracy increase of 8.5%',
-        'Raised employee attendance and feedback rates by 12% by architecting a dashboard using React, Java, Flask, and SQL to improve real-time visualization and data handling, enhancing attendance tracking and feedback management',
-        'Reduced model bias by approximately 5% by leveraging PyTest and Keras to test the proprietary RAKE model with different weights, optimizers, and data augmentation algorithms'
+        'Executed Python scripts with OpenCV and Pandas for image stitching and data augmentation on CUDA to train transportation detection models using ResNet and PyTorch, increasing accuracy by 8.5%',
+        'Built an internal employee dashboard using React, Java, and SQL, increasing attendance and feedback rates by 12%',
+        'Identified data bias in license plate recognition and reduced the accuracy gap between dark and light license plates from 15% to 5% by optimizing data preprocessing with PyTorch and balancing training data for YOLOv5 model'
       ],
       logo: '/assets/atailogo.jpeg'
     },
     {
-      title: 'Research @ Viterbi',
-      position: 'Undergraduate Researcher',
-      date: 'January 2023 - April 2024',
+      title: 'USC Viterbi School of Engineering',
+      position: 'NLP Undergraduate Researcher',
+      date: 'January 2023 - May 2023',
       description: [
-        'Assisted Prof. Najmedin Meshkati with a research project related to analysing nuclear safety data at the Diablo Canyon Nuclear Plant',
-        'Investigated 10+ NLP techniques, like sentiment analysis and named entity recognition, applying TensorFlow to train a BERT model on 5,000+ report pages, improving LLM models’ accuracy by 8% in nuclear safety data analysis',
+        'Implemented text preprocessing, sentiment analysis, and named entity recognition on 5,000+ nuclear safety reports, improving data extraction efficiency by 15% using TensorFlow and PyTorch',
+        'Fine-tuned a BERT-based transformer model on nuclear safety document with probabilistic clustering algorithms and cosine similarity, increasing LLM accuracy by 8%',
         'Employed probabilistic clustering algorithms and cosine similarity techniques with PyTorch and NumPy to deduce nuclear safety traits, leading to a presentation that won Best Team at USC CKIDS Fest',
-        'Research assistant at SLURM Lab under Prof. Daniel Seita, working on a Gen-AI project aimed at developing a benchmark for multi-agent, deformable object manipulation tasks',
-        'Imported ALOHA robotic platform and deformable objects via Robosuite into MuJoCo simulation environment, halving training data collection time for a curriculum-based reinforcement learning pipeline'
       ],
       logo: '/assets/uscviterbi.jpg'
     }
@@ -810,34 +1005,27 @@ export class AppComponent implements OnInit {
 
   organizations: Organization[] = [
     {
+      name: 'TroyLabs',
+      logo: '/assets/troylabs.png',
+      summary: 'Software Engineer for USC\'s largest startup accelerator. We take in top startups at USC every semester and help them scale from early-stage/MVP to funding-ready.',
+      image: '/assets/troylabspic.JPG'
+    },
+    {
       name: 'CAIS++',
       logo: '/assets/caislogo.png',
-      description: [
-        'Applying AI/ML concepts related to fields like computer vision, generative AI, and NLP to train models that can analyze and make predictions from various datasets and discussing insights with peers in my cohort',
-        'Implemented natural language processing techniques to analyze and understand movie narratives, enhancing recommendation systems by identifying thematic and narrative threads using cosine similarity and TF-IDF vectorization',
-        'Developed a binary classification model using computer vision to differentiate between ASL sign language alphabets, achieving a high accuracy of 98.46% by utilizing the Yolov6 model',
-        'Designed and presented research posters in OpenShowCAIS++ 2023 and 2024 in front of hundreds of people'
-      ],
+      summary: 'Applying AI/ML concepts in computer vision, generative AI, reinforcement learning and NLP. Worked on research projects every semester and presented research posters at OpenShowCAIS++ events.',
       image: '/assets/cais.jpg'
     },
     {
       name: 'ShiftSC',
       logo: '/assets/shiftlogo.jpeg',
-      description: [
-        'Shift SC aims to promote interdisciplinary conversation and action at USC around the social implications and ethical issues of modern technology',
-        'Organized events related to VR for cognitive behavioral therapy, and an XR pitch competition, handling marketing, logistics, and planning, successfully getting hundreds of attendees',
-        'Consistently presenting the ethical implications of technologies and promoting positive technology implications around USC'
-      ],
+      summary: 'Promoting interdisciplinary conversation around technology ethics at USC. Organized VR therapy events and XR pitch competitions, successfully attracting hundreds of attendees to discuss positive technology implications.',
       image: '/assets/shift.jpeg'
     },
     {
       name: 'Annenberg Media',
       logo: '/assets/annenbergicon.png',
-      description: [
-        'Worked as a Software Developer for the student-run newsroom at USC Annenberg',
-        'Helped produce and display multimedia content for digital platforms',
-        'Improved UI/UX of website by working on features like estimated reading time and article summaries'
-      ],
+      summary: 'Software Developer for USC Annenberg\'s student-run newsroom. Contributed to multimedia content production and improved website UI/UX with features like estimated reading time and article summaries.',
       image: '/assets/annenbergmedia.jpeg'
     }
   ];
