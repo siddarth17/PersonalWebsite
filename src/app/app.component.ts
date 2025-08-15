@@ -54,13 +54,13 @@ const fadeAnimation = trigger('fadeAnimation', [
       </nav>
       <div class="content">
         <div class="image-container fade-in">
-          <img src="assets/Rudraraju_Siddarth_Photo.jpg" alt="Profile picture" class="profile-image">
+          <img src="assets/siddarthwebsitepic.jpg" alt="Profile picture" class="profile-image">
         </div>
         <div class="text-container fade-in">
           <h1 class="title">Siddarth Rudraraju</h1>
-          <h1 class="title">Ideator, Developer, Motivator</h1>
+          <h1 class="title">Ideator, Developer, Explorer</h1>
           <p class="about-text">
-          I'm a driven USC student with a passion for Web/App Development, AI/ML, and Blockchain. With hands-on experience in developing deep learning models, conducting NLP research, coding websites and applications for organizations, and analyzing company data to formulate effective business strategies, I thrive on stepping out of my comfort zone and acquiring new knowledge that enables me to make a meaningful impact. Additionally, my work on projects like LiveTunez, OptiPath, and RecruitRocket allowed me to understand diverse user needs, from recruiters to music enthusiasts, and develop solutions that blend user-centric design with technical performance. These experiences fueled my interest in how technology can transform industries and impact stakeholders.
+          I'm a driven USC student with a passion for Web/App Development, AI/ML, and Entrepreneurship. I’m hungry to build, learn, and be a part of a team where I can grow and make a real impact. With hands-on experience building products for startups from 0 to 1, launching apps online, conducting Generative AI and NLP research, developing applications for organizations, and formulating product growth strategies, I thrive on stepping out of my comfort zone and acquiring new knowledge to make a meaningful impact. My work on projects like LiveTunez, OptiPath, and RecruitRocket has given me a deep understanding of diverse user needs, from recruiters to music enthusiasts, and has taught me how to create solutions that combine user-centric design with strong technical performance. These experiences have fueled my passion for leveraging technology to transform industries and deliver value to stakeholders.
           </p>
           <div class="social-links">
             <a href="mailto:sr88018@usc.edu" class="social-link gmail-link">
@@ -270,7 +270,7 @@ const fadeAnimation = trigger('fadeAnimation', [
     font-size: 18px;
     line-height: 1.6;
     margin: 0;
-    text-align: justify;
+    text-align: left;
     max-width: 600px;
   }
   .social-links {
@@ -1034,7 +1034,7 @@ export class AppComponent implements OnInit {
     {
       name: 'Piano',
       image: '/assets/piano.JPG',
-      description: 'I have played the piano for over 7 years, completing several Trinity Piano grades. I performed in various recitals, fundraisers, and charity events. I also taught underprivileged children in India how to play the instrument, I continue to learn and play my favorite songs to this day.'
+      description: 'I have played the piano for over 7 years, completing several Trinity Piano grades. I performed in various recitals, fundraisers, and charity events. I continue to learn and play my favorite songs to this day.'
     },
     {
       name: 'MUN/Debate',
