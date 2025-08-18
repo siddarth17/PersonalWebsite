@@ -1013,7 +1013,7 @@ export class AppComponent implements OnInit {
     {
       name: 'CAIS++',
       logo: '/assets/caislogo.png',
-      summary: 'Applying AI/ML concepts in computer vision, generative AI, reinforcement learning and NLP. Worked on research projects every semester and presented research posters at OpenShowCAIS++ events.',
+      summary: 'Applying AI/ML concepts like computer vision, generative AI, reinforcement learning and NLP. Worked on research projects every semester and presented research posters at OpenShowCAIS++ events.',
       image: '/assets/cais.jpg'
     },
     {
